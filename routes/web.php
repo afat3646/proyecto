@@ -7,6 +7,8 @@ use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\orderContoller; 
 
 
+
+
 Route::get('/', [PublicController::class, 'welcome']);
 //Route::resource('userses', UserController::class);
 

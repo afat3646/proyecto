@@ -21,6 +21,7 @@ class orderContoller
      */
     public function create()
     {
+        
         return view('orders.create');
     }
 
