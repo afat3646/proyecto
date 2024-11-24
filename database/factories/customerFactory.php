@@ -22,4 +22,5 @@ class customerFactory extends Factory
             'customer_number'=>fake()->numerify('########')
         ];
     }
+    
 }

@@ -14,7 +14,10 @@ class routeorderSeeder extends Seeder
     public function run(): void
     {
         routeorder::create([
-            'route_status'=>'In progress'
+            'route_name'=>'Route atlanta',
+            'route_status'=>'In progress',
+            'order_id' => 1,
         ]);
+        routeorder::factory(10)->create();
     }
 }

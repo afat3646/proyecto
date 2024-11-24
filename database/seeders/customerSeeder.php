@@ -19,5 +19,7 @@ class customerSeeder extends Seeder
             'customer_number'=>'82991734'
 
         ]);
+        customer::factory(10)->create();
     }
+    
 }

@@ -21,5 +21,6 @@ class dashboardSeeder extends Seeder
             'order_status'=>'Active, in progress'
 
         ]);
+        dashboard::factory(10)->create();
     }
 }

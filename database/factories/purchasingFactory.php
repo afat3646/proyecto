@@ -20,5 +20,6 @@ class purchasingFactory extends Factory
             'worker_name'=>fake()->name(),
             'order_details'=>fake()->realText(250,5)
         ];
+        
     }
 }

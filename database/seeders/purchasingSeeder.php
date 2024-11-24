@@ -16,5 +16,6 @@ class purchasingSeeder extends Seeder
             'worker_name'=>'Alan',
             'Order_details'=>'Delivered on my construction site'
         ]);
+        purchasing::factory(10)->create();
     }
 }

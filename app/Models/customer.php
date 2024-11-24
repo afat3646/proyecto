@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\order;
 class customer extends Model
 {
     use HasFactory;
@@ -13,7 +14,7 @@ class customer extends Model
         'customer_number'
 
     ];
-    public function dashboard(){
-        return $this->belongsTo(dashboard::class);
-    }
+   public function orders(){
+    return $this->hasMany(order::class);
+   }
 }

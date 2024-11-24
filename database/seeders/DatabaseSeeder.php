@@ -35,24 +35,29 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             
-            dashboardSeeder::class,
             customerSeeder::class,
             orderSeeder::class,
+            dashboardSeeder::class,
+            purchasingSeeder::class,
             salesSeeder::class,
-            purchasingSeeder:: class,
             userSeeder::class,
             warehouseSeeder::class,
-            routeorderSeeder::class
+            routeorderSeeder::class,
         ]);
         
-        
+        $customer = customer::factory(5)->create();
+        $dashboard = dashboard::factory(15)->create();
+        $order = order:: factory(15)->create();
         $purchasing = purchasing:: factory(5)->create();
-        $routeorder = routeorder:: factory(15)->create();
         $sales = sales:: factory(15)->create();
         $User = User::factory(15)->create();
         $warehouse = warehouse::factory(5)->create();
-        $dashboard = dashboard::factory(15)->create();
-        $customer = customer::factory(5)->create();
-        $order = order:: factory(15)->create();
+        $routeorder = routeorder:: factory(15)->create();
+        
+        
+        
+        
+        
+        
     }
 }

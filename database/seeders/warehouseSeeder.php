@@ -15,9 +15,13 @@ class warehouseSeeder extends Seeder
     public function run(): void
     {
         warehouse::create([
+            'name' => 'Main Warehouse',
             'materials'=> 'concrate, Gravel, Wood',
             'assinged_name'=>'Alan',
             'order_status'=>'Delivered'
+        ]);
+        warehouse::factory(10)->create([
+            'name' => 'Secondary Warehouse',
         ]);
     }
 }

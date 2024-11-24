@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\customer;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -17,15 +17,16 @@ class orderFactory extends Factory
     public function definition(): array
     {
         return [
-            'invoice_number'=>fake()->randomNumber(),
+            'invoice_number' => fake()->bothify('??#####'),
             'customer_name'=> fake()->name(),
             'details_order'=>fake()->text(100),
-            'fiscal_data'=> fake()->randomNumber(),
+            'fiscal_data' => fake()->bothify('??##??##'),
             'delivery_address'=>fake()->text(100),
-            'status'=>fake()->randomElement(['In progres','Delivered','Delayed']),
+            'status'=>fake()->randomElement(['In progress','Delivered','Delayed']),
             'extra_info'=>fake()->text(100),
             'photo_Loaded'=>fake()->randomElement(['Loaded', 'Not Loaded']),
-            'photo_Delivered_Order' => fake()->randomElement(['Delivered', 'Not delivered'])
+            'photo_Delivered_Order' => fake()->randomElement(['Delivered', 'Not delivered']),
+            'customer_id' => customer::inRandomOrder()->first()->id ?? customer::factory()->create()->id,
         ];
     }
 }

@@ -46,9 +46,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function dashboard(){
-        return $this->belongsTo(dashboard::class);
-    }
+   
     
     
 }

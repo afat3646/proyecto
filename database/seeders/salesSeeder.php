@@ -18,5 +18,6 @@ class salesSeeder extends Seeder
             'order_details'=>'no details added',
             'customer_details'=>'No details added'
         ]);
+        sales::factory(10)->create();
     }
 }

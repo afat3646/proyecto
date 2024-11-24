@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\order;
 class purchasing extends Model
 {
     use HasFactory;
@@ -12,10 +13,6 @@ class purchasing extends Model
         'order_details',
         'pickup_order'
     ];
-    public function dashboard(){
-        return $this->belongsTo(dashboard::class);
-    }
-
     public function orders(){
         return $this->belongsTo(order::class);
     }

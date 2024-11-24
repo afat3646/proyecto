@@ -17,7 +17,9 @@ class routeorderFactory extends Factory
     public function definition(): array
     {
         return [
-            'route_status'=>fake()->randomElement(['In progres','Delivered','Delayed'])
+            'route_status'=>fake()->randomElement(['In progress','Delivered','Delayed']),
+            'order_id' => fake()->randomDigitNotNull(),
+            'route_name'=>fake()->name(),
         ];
     }
 }

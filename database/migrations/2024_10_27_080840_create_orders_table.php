@@ -20,9 +20,13 @@ return new class extends Migration
             $table->string('delivery_address');
             $table->string('status');
             $table->string('extra_info');           
-            $table->string('photo_Loaded');
-            $table->string('photo_Delivered_Order');
+            $table->string('photo_Loaded')->nullable();;
+            $table->string('photo_Delivered_Order')->nullable();;
             $table->timestamps();
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
+            $table->foreignId('warehouse_id')->nullable()->constrained('warehouses');
+            
+            
         });
     }
 

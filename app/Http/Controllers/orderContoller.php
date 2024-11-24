@@ -12,7 +12,19 @@ class orderContoller
      */
     public function index()
     {
-        $orders = order::get();
+        $query = Order::query();
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        if ($request->filled('customer_id')) {
+            $query->where('customer_id', $request->customer_id);
+        }
+        if ($request->filled('date')) {
+            $query->whereDate('order_Date', $request->date);
+        }
+
+        $orders = $query->get();
         return view('orders.index', compact('orders'));
     }
 
@@ -30,17 +42,18 @@ class orderContoller
      */
     public function store(Request $request)
     {
-        dasboard::create([
-            'invoice_number'=> $request->invoice_number,
-            'details_order'=> $request->details_order,
-            'customer_name'=>$request->customer_name,
-            'fiscal_data'=>$request->fiscal_data,
-            'delivery_address'=>$request->delivery_address,
-            'status'=>$request->status,
-            'extra_info'=>$request->extra_info,
-
+        $validated = $request->validate([
+            'invoice_number' => 'required|string|max:255',
+            'details_order' => 'required|string',
+            'customer_name' => 'required|string|max:255',
+            'fiscal_data' => 'required|string',
+            'delivery_address' => 'required|string',
+            'status' => 'required|string|in:ordered,in_process,in_route,delivered',
         ]);
-        return to_route('orders.index');
+    
+        Order::create($validated);
+    
+        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
     }
 
     /**
@@ -70,8 +83,51 @@ class orderContoller
     /**
      * Remove the specified resource from storage.
      */
+    public function updateStatus(Request $request, $id)
+    {
+        // Validar el nuevo estado
+        $validated = $request->validate([
+            'status' => 'required|string|in:ordered,in_process,in_route,delivered',
+        ]);
+
+        // Buscar la orden
+        $order = Order::findOrFail($id);
+
+        // Actualizar el estado
+        $order->update(['status' => $validated['status']]);
+
+        return redirect()->back()->with('success', 'Order status updated successfully.');
+    }
+    public function uploadPhoto(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        // Validar y subir la foto
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('uploads', 'public');
+            
+            if ($order->status === 'in_route') {
+                $order->update(['photo_Loaded' => $path]);
+            } elseif ($order->status === 'delivered') {
+                $order->update(['photo_Delivered_Order' => $path]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Photo uploaded successfully.');
+    }
     public function destroy(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->update(['status' => 'archived']);
+
+        return redirect()->route('orders.index')->with('success', 'Order archived successfully.');
+
+    }
+    public function restore($id)
+    {
+        $order = Order::where('id', $id)->where('status', 'archived')->firstOrFail();
+        $order->update(['status' => 'ordered']); // Restaurar al estado inicial
+
+        return redirect()->route('orders.index')->with('success', 'Order restored successfully.');
     }
 }
