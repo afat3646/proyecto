@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('photo_Loaded')->nullable();;
             $table->string('photo_Delivered_Order')->nullable();;
             $table->timestamps();
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->foreignId('warehouse_id')->nullable()->constrained('warehouses');
             
             

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('customer_name');
             $table->string('fiscal_Data');
             $table->string('customer_number')->unique();
+            
             $table->timestamps();
         });
     }

@@ -1,31 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\order;
-
 use Illuminate\Http\Request;
+use App\Models\order;
+use App\Models\customer;
+
 
 class orderContoller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = Order::query();
+        $query = order::query();
 
         if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
+        $query->where('status', $request->status);
+    }
         if ($request->filled('customer_id')) {
-            $query->where('customer_id', $request->customer_id);
-        }
-        if ($request->filled('date')) {
-            $query->whereDate('order_Date', $request->date);
-        }
+        $query->where('customer_id', $request->customer_id);
+    }
+    if ($request->filled('date')) {
+        $query->whereDate('order_Date', $request->date);
+    }
 
-        $orders = $query->get();
-        return view('orders.index', compact('orders'));
+    $orders = $query->get();
+    return view('orders.index', compact('orders'));
     }
 
     /**
@@ -49,11 +50,12 @@ class orderContoller
             'fiscal_data' => 'required|string',
             'delivery_address' => 'required|string',
             'status' => 'required|string|in:ordered,in_process,in_route,delivered',
+            'extra_info' => 'nullable|string',
         ]);
     
-        Order::create($validated);
+        order::create($validated);
     
-        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        return redirect('/orders')->with('success', 'Order created successfully!');
     }
 
     /**
@@ -61,7 +63,8 @@ class orderContoller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::with(['customer', 'warehouse', 'purchasing', 'routeorder'])->findOrFail($id);
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -69,7 +72,8 @@ class orderContoller
      */
     public function edit(string $id)
     {
-        //
+        $order = order::findOrFail($id);
+        return view('orders.edit', compact('order'));
     }
 
     /**
@@ -77,7 +81,20 @@ class orderContoller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $order = order::findOrFail($id);
+
+        $validated = $request->validate([
+            'invoice_number' => 'required|string|max:255',
+            'details_order' => 'required|string',
+            'customer_name' => 'required|string|max:255',
+            'fiscal_data' => 'required|string',
+            'delivery_address' => 'required|string',
+            'status' => 'required|string|in:ordered,in_process,in_route,delivered',
+        ]);
+
+        $order->update($validated);
+
+        return redirect()->route('orders.index')->with('success', 'order updated successfully.');
     }
 
     /**
@@ -85,15 +102,15 @@ class orderContoller
      */
     public function updateStatus(Request $request, $id)
     {
-        // Validar el nuevo estado
+        
         $validated = $request->validate([
             'status' => 'required|string|in:ordered,in_process,in_route,delivered',
         ]);
 
-        // Buscar la orden
+    
         $order = Order::findOrFail($id);
 
-        // Actualizar el estado
+        
         $order->update(['status' => $validated['status']]);
 
         return redirect()->back()->with('success', 'Order status updated successfully.');
@@ -102,7 +119,7 @@ class orderContoller
     {
         $order = Order::findOrFail($id);
 
-        // Validar y subir la foto
+        
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('uploads', 'public');
             
@@ -126,7 +143,7 @@ class orderContoller
     public function restore($id)
     {
         $order = Order::where('id', $id)->where('status', 'archived')->firstOrFail();
-        $order->update(['status' => 'ordered']); // Restaurar al estado inicial
+        $order->update(['status' => 'ordered']); 
 
         return redirect()->route('orders.index')->with('success', 'Order restored successfully.');
     }

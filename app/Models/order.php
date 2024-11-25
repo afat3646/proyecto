@@ -27,16 +27,16 @@ class order extends Model
     ];
     
     public function customer(){
-        return $this->belongTo(customer::class);
+        return $this->belongsTo(customer::class);
     }
     public function routeorder(){
         return $this->hasOne(routeorder::class);
     }
     public function warehouse(){
-        return $this->belongTo(warehouse::class);
+        return $this->belongsTo(warehouse::class);
     }
     public function purchasing(){
-        return $this->belongTo(purchasing::class);
+        return $this->belongsTo(purchasing::class);
     }
     
 

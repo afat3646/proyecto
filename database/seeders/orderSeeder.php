@@ -25,11 +25,8 @@ class orderSeeder extends Seeder
             'extra_info'=>'The order will be received by our workers',
             'photo_Loaded'=>'yes',
             'photo_Delivered_Order'=>'no, status is in progress',
-            'customer_id' => $customer->id,
 
         ]);
-        order::factory(10)->create([
-            'customer_id' => $customer->id,
-        ]);
+        order::factory(10)->create();
     }
 }

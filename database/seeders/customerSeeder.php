@@ -16,7 +16,8 @@ class customerSeeder extends Seeder
         customer::create([
             'customer_name'=>'Michelle Johanson',
             'fiscal_Data'=>'HAU1082ND',
-            'customer_number'=>'82991734'
+            'customer_number'=>'82991734',
+        
 
         ]);
         customer::factory(10)->create();

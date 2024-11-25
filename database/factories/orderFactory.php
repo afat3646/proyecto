@@ -26,7 +26,6 @@ class orderFactory extends Factory
             'extra_info'=>fake()->text(100),
             'photo_Loaded'=>fake()->randomElement(['Loaded', 'Not Loaded']),
             'photo_Delivered_Order' => fake()->randomElement(['Delivered', 'Not delivered']),
-            'customer_id' => customer::inRandomOrder()->first()->id ?? customer::factory()->create()->id,
         ];
     }
 }
