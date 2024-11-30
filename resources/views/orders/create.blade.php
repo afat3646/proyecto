@@ -46,8 +46,9 @@
         <label for="extra_info" class="form-label">Extra Info</label>
         <input type="text" name="extra_info" id="extra_info" class="form-control">
     </div>
-    <div class="d-grid">
+    <div class="btn-group">
         <button type="submit" class="btn btn-primary">Create Order</button>
+        <a href="{{ route('orders.index') }}" class="btn btn-secondary">Back to All Orders</a>
     </div>
     </form>
         </form>

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class PublicController
 {
     public function welcome(){
-    $dashboard = dashboard::all();
-    dd($dashboard);
+    
+     $dashboards = dashboard::all();
+     return view('principalPage',compact('dashboards'));
     }
 }

@@ -31,7 +31,6 @@
                         <p class="card-text"><strong>Photo Loaded:</strong> {{ $order->photo_Loaded }}</p>
                         <p class="card-text"><strong>Photo Delivered:</strong> {{ $order->photo_Delivered_Order }}</p>
                         <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info btn-sm mt-2">View Order</a>
-                        
                         <form action="{{ route('orders.destroy', $order->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
