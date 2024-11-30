@@ -19,8 +19,6 @@ class customerFactory extends Factory
         return [
             'customer_name'=> fake()->name(),
             'fiscal_data'=> fake()->bothify('??##??##'),
-            'customer_number'=>fake()->numerify('########'),
-            
         ];
     }
     

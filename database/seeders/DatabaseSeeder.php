@@ -36,7 +36,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             
             customerSeeder::class,
-            dashboardSeeder::class,
             purchasingSeeder::class,
             salesSeeder::class,
             userSeeder::class,
@@ -46,7 +45,6 @@ class DatabaseSeeder extends Seeder
         ]);
         
         $customer = customer::factory(5)->create();
-        $dashboard = dashboard::factory(15)->create();
         $purchasing = purchasing:: factory(5)->create();
         $sales = sales:: factory(15)->create();
         $User = User::factory(15)->create();

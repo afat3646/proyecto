@@ -11,7 +11,6 @@ class warehouse extends Model
     protected $fillable=[
         'materials',
         'assigned_name',
-        'order_status'
     ];
    
     public function orders(){

@@ -11,7 +11,10 @@ class purchasing extends Model
     protected $fillable = [
         'worker_name',
         'order_details',
-        'pickup_order'
+        'supplier_name',
+        'purchase_details',
+        'fiscal_data',
+        'order_status',
     ];
     public function orders(){
         return $this->belongsTo(order::class);

@@ -15,8 +15,8 @@ class salesSeeder extends Seeder
     {
         sales::create([
             'sales_name'=>'Pedro Parker',
+            'customer_details'=>'no info required',
             'order_details'=>'no details added',
-            'customer_details'=>'No details added'
         ]);
         sales::factory(10)->create();
     }

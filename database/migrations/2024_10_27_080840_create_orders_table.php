@@ -12,19 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->string('invoice_number');
-            $table->string('details_order');
-            $table->string('customer_number');
-            $table->foreign('customer_number')->references('customer_number')->on('customers')->onDelete('cascade');
-            $table->string('fiscal_data');
-            $table->string('delivery_address');
-            $table->string('status');
-            $table->string('extra_info');           
-            $table->string('photo_Loaded')->nullable();;
-            $table->string('photo_Delivered_Order')->nullable();
-            $table->foreignId('assinged_name')->nullable()->constrained('warehouses');
-            $table->timestamps();
+            $table->id(); 
+            $table->string('invoice_number'); 
+            $table->string('details_order'); 
+            $table->string('delivery_address'); 
+            $table->text('extra_info')->nullable(); 
+            $table->string('photo_Loaded')->nullable(); 
+            $table->string('photo_Delivered_Order')->nullable(); 
+            $table->string('fiscal_data')->nullable(); 
+            $table->string('order_status');
+            $table->timestamps(); 
             
         });
     }

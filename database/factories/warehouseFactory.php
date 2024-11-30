@@ -19,7 +19,7 @@ class warehouseFactory extends Factory
         return [
             'materials' => implode(', ', fake()->words(3)),
             'assinged_name'=>fake()->name(),
-            'order_status'=>fake()->randomElement(['In progres','Delivered','Delayed'])
+            
         ];
     }
 }

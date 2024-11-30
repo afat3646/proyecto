@@ -16,19 +16,15 @@ class order extends Model
     protected $fillable = [
         'invoice_number',
         'details_order',
-        'customer_number',
-        'fiscal_data',
-        'order_Date',
         'delivery_address',
-        'status',
+        'order_status',
         'extra_info',
-        'assinged_name',
         'photo_Loaded',
         'photo_Delivered_Order',
     ];
     
     public function customer(){
-        return $this->belongsTo(Customer::class, 'customer_number', 'customer_number');
+        return $this->belongsTo(Customer::class);
     }
     public function routeorder(){
         return $this->hasOne(routeorder::class);

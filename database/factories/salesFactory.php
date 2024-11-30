@@ -18,8 +18,8 @@ class salesFactory extends Factory
     {
         return [
             'sales_name'=>fake()->name(),
-            'order_details'=>fake()->realText(250,5),
-            'customer_details'=>fake()->realText(250,5)
+            'customer_details'=>fake()->realText(250,5),
+            'order_details'=>fake()->realText(255,5)
         ];
     }
 }

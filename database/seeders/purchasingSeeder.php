@@ -13,8 +13,12 @@ class purchasingSeeder extends Seeder
     public function run(): void
     {
         purchasing::create([
-            'worker_name'=>'Alan',
-            'Order_details'=>'Delivered on my construction site'
+            'purchase_order_number'=> '19HN34H',
+        
+            'purchase_details'=>'10tn grave',
+            'supplier_name'=>'moztezuma'
+
+
         ]);
         purchasing::factory(10)->create();
     }

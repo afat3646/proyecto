@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\customer;
+use App\Models\warehouse;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -16,14 +17,14 @@ class orderFactory extends Factory
      */
     public function definition(): array
     {
-        $customer = customer::factory()->create();
+        $customer = Customer::first() ?? Customer::factory()->create();
+        $warehouse = Warehouse::first() ?? Warehouse::factory()->create();
         return [
             'invoice_number' => fake()->bothify('??#####'),
             'details_order'=>fake()->text(100),
-            'customer_number' => $customer->customer_number,
             'fiscal_data' => fake()->bothify('??##??##'),
+            'order_status' => fake()->randomElement(['In progress', 'Delivered', 'Delayed', 'Ordered']),
             'delivery_address'=>fake()->text(100),
-            'status'=>fake()->randomElement(['In progress','Delivered','Delayed']),
             'extra_info'=>fake()->text(100),
             'photo_Loaded'=>fake()->randomElement(['Loaded', 'Not Loaded']),
             'photo_Delivered_Order' => fake()->randomElement(['Delivered', 'Not delivered']),

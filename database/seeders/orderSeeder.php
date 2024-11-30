@@ -18,17 +18,15 @@ class orderSeeder extends Seeder
         $customer = customer::first() ?? customer::factory()->create();
         $warehouse = warehouse::first() ?? warehouse::factory()->create();
         order::create([
-            'invoice_number'=>'1975673JDH',
-            'details_order'=>'10 Tn of grave to delivered on a week',
-            'customer_number' => $customer->customer_number,
-            'fiscal_data'=>'88JFNN1H82N',
-            'delivery_address'=>' P Sherman calle walaby no c Sidney',
-            'status'=>'Active, in progress',
-            'extra_info'=>'The order will be received by our workers',
-            'photo_Loaded'=>'yes',
-            'photo_Delivered_Order'=>'no, status is in progress',
-            'assinged_name' => $warehouse->id,
-
+            'invoice_number' => '1975673JDH',
+            'details_order' => '10 Tn of grave to be delivered on a week',
+            'delivery_address' => 'P Sherman calle walaby no c Sidney',
+            'fiscal_data'=> 'test',
+            'order_status' => 'Ordered',
+            'extra_info' => 'Delivery scheduled for next Monday.',
+            'photo_Loaded' => 'Loaded',
+            'photo_Delivered_Order' => 'Not Loaded',
+            
         ]);
         order::factory(10)->create();
     }

@@ -17,9 +17,13 @@ class purchasingFactory extends Factory
     public function definition(): array
     {
         return [
-            'worker_name'=>fake()->name(),
-            'order_details'=>fake()->realText(250,5)
-        ];
+            
+            'purchase_details'=>fake()->realText(250,5),
+            'supplier_name'=>fake()->name(),
+            'purchase_order_number'=> fake()->bothify('??##??##'),
+            'purchase_details'=>fake()->realText(250,5)
+
+            ];
         
     }
 }
