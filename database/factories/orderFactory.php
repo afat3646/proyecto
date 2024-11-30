@@ -16,10 +16,11 @@ class orderFactory extends Factory
      */
     public function definition(): array
     {
+        $customer = customer::factory()->create();
         return [
             'invoice_number' => fake()->bothify('??#####'),
-            'customer_name'=> fake()->name(),
             'details_order'=>fake()->text(100),
+            'customer_number' => $customer->customer_number,
             'fiscal_data' => fake()->bothify('??##??##'),
             'delivery_address'=>fake()->text(100),
             'status'=>fake()->randomElement(['In progress','Delivered','Delayed']),

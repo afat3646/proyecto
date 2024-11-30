@@ -14,7 +14,7 @@
         <ul class="list-group">
         <li class="list-group-item"><strong>Invoice Number:</strong> {{ $order->invoice_number }}</li>
             <li class="list-group-item"><strong>Order Details:</strong> {{ $order->details_order }}</li>
-            <li class="list-group-item"><strong>Customer Name:</strong> {{ $order->customer_name }}</li>
+            <li class="list-group-item"><strong>Customer Number:</strong> {{ $order->customer_number }}</li>
             <li class="list-group-item"><strong>Fiscal Data:</strong> {{ $order->fiscal_data }}</li>
             <li class="list-group-item"><strong>Delivery Address:</strong> {{ $order->delivery_address }}</li>
             <li class="list-group-item"><strong>Status:</strong>4 {{ $order->status }}</li>

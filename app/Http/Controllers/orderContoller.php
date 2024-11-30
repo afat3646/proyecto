@@ -46,7 +46,7 @@ class orderContoller
         $validated = $request->validate([
             'invoice_number' => 'required|string|max:255',
             'details_order' => 'required|string',
-            'customer_name' => 'required|string|max:255',
+            'customer_number' => 'required|exists:customers,customer_number',
             'fiscal_data' => 'required|string',
             'delivery_address' => 'required|string',
             'status' => 'required|string|in:ordered,in_process,in_route,delivered',

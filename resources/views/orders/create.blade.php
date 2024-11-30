@@ -22,8 +22,8 @@
         <input type="text" name="details_order" id="details_order" class="form-control" required>
         </div>
         <div class="mb-3">
-        <label for="customer_name" class="form-label">Customer Name</label>
-        <input type="text" name="customer_name" id="customer_name" class="form-control" required>
+        <label for="customer_name" class="form-label">CustomerID</label>
+        <input type="text" name="customer_name" id="customer_number" class="form-control" required>
         </div>
         <div class="mb-3">
         <label for="fiscal_data" class="form-label">Fiscal Data</label>

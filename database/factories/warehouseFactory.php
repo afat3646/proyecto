@@ -17,7 +17,6 @@ class warehouseFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->company(),
             'materials' => implode(', ', fake()->words(3)),
             'assinged_name'=>fake()->name(),
             'order_status'=>fake()->randomElement(['In progres','Delivered','Delayed'])
