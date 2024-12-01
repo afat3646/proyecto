@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\sales;
 
 class salesController
 {
@@ -11,7 +12,8 @@ class salesController
      */
     public function index()
     {
-        //
+        $sales = Sales::all(); // Obtener todas las ventas
+        return view('sales.index', compact('sales'));
     }
 
     /**
@@ -19,7 +21,7 @@ class salesController
      */
     public function create()
     {
-        
+        return view('sales.create');
     }
 
     /**
@@ -27,7 +29,16 @@ class salesController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'sales_name' => 'required|string|max:255',
+            'order_details' => 'required|string',
+            'customer_details' => 'required|string',
+        ]);
+
+        Sales::create($request->all());
+
+        return redirect()->route('sales.index')->with('success', 'Sale created successfully.');
+
     }
 
     /**
@@ -35,7 +46,8 @@ class salesController
      */
     public function show(string $id)
     {
-        //
+        $sale = Sales::findOrFail($id);
+        return view('sales.show', compact('sale'));
     }
 
     /**
@@ -43,7 +55,8 @@ class salesController
      */
     public function edit(string $id)
     {
-        //
+        $sale = Sales::findOrFail($id);
+        return view('sales.edit', compact('sale'));
     }
 
     /**
@@ -51,7 +64,17 @@ class salesController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'sales_name' => 'required|string|max:255',
+            'order_details' => 'required|string',
+            'customer_details' => 'required|string',
+        ]);
+
+        $sale = Sales::findOrFail($id);
+        $sale->update($request->all());
+
+        return redirect()->route('sales.index')->with('success', 'Sale updated successfully.');
+
     }
 
     /**
@@ -59,6 +82,10 @@ class salesController
      */
     public function destroy(string $id)
     {
-        //
+        $sale = Sales::findOrFail($id);
+        $sale->delete();
+
+        return redirect()->route('sales.index')->with('success', 'Sale deleted successfully.');
+
     }
 }

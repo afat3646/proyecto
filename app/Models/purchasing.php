@@ -9,12 +9,9 @@ class purchasing extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'worker_name',
-        'order_details',
         'supplier_name',
         'purchase_details',
-        'fiscal_data',
-        'order_status',
+        'purchase_order_number',
     ];
     public function orders(){
         return $this->belongsTo(order::class);

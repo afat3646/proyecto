@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\routeorder;
 
 class routeOrderController
 {
@@ -11,7 +12,8 @@ class routeOrderController
      */
     public function index()
     {
-        //
+        $routeOrders = routeOrder::all();
+        return view('routeOrder.index', compact('routeOrders'));
     }
 
     /**
@@ -19,7 +21,7 @@ class routeOrderController
      */
     public function create()
     {
-        
+        return view('routeorder.create');
     }
 
     /**
@@ -27,7 +29,15 @@ class routeOrderController
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'order_number' => 'required|string|max:255',
+            'destination' => 'required|string|max:255',
+            'details' => 'required|string',
+        ]);
+
+        RouteOrder::create($validatedData);
+
+        return redirect()->route('routeOrder.index')->with('success', 'Route order created successfully.');
     }
 
     /**
@@ -35,7 +45,8 @@ class routeOrderController
      */
     public function show(string $id)
     {
-        //
+        $routeOrder = routeOrder::findOrFail($id);
+        return view('routeOrder.show', compact('routeOrder'));
     }
 
     /**
@@ -43,7 +54,8 @@ class routeOrderController
      */
     public function edit(string $id)
     {
-        //
+        $routeOrder = RouteOrder::findOrFail($id);
+        return view('routeorder.edit', compact('routeOrder'));
     }
 
     /**
@@ -51,7 +63,17 @@ class routeOrderController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'order_number' => 'required|string|max:255',
+            'destination' => 'required|string|max:255',
+            'details' => 'required|string',
+        ]);
+
+        $routeOrder = routeOrder::findOrFail($id);
+        $routeOrder->update($validatedData);
+
+        return redirect()->route('routeOrder.index')->with('success', 'Route order updated successfully.');
+
     }
 
     /**
@@ -59,6 +81,10 @@ class routeOrderController
      */
     public function destroy(string $id)
     {
-        //
+        $routeOrder = routeOrder::findOrFail($id);
+        $routeOrder->delete();
+
+        return redirect()->route('routeOrder.index')->with('success', 'Route order deleted successfully.');
+
     }
 }

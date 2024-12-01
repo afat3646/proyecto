@@ -25,9 +25,8 @@
                         <p class="card-text"><strong>Invoice Number:</strong> {{ $order->invoice_number }}</p>
                         <p class="card-text"><strong>Order Details:</strong> {{ $order->details_order }}</p>
                         <p class="card-text"><strong>Fiscal Data:</strong> {{ $order->fiscal_data }}</p>
-                        <p class="card-text"><strong>Customer Number:</strong> {{ $order->customer_number }}</p>
                         <p class="card-text"><strong>Delivery Address:</strong> {{ $order->delivery_address }}</p>
-                        <p class="card-text"><strong>Status:</strong> {{ $order->status }}</p>
+                        <p class="card-text"><strong>Status:</strong> {{ $order->order_status }}</p>
                         <p class="card-text"><strong>Extra Info:</strong> {{ $order->extra_info }}</p>
                         <p class="card-text"><strong>Photo Loaded:</strong> {{ $order->photo_Loaded }}</p>
                         <p class="card-text"><strong>Photo Delivered:</strong> {{ $order->photo_Delivered_Order }}</p>

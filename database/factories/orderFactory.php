@@ -17,8 +17,6 @@ class orderFactory extends Factory
      */
     public function definition(): array
     {
-        $customer = Customer::first() ?? Customer::factory()->create();
-        $warehouse = Warehouse::first() ?? Warehouse::factory()->create();
         return [
             'invoice_number' => fake()->bothify('??#####'),
             'details_order'=>fake()->text(100),

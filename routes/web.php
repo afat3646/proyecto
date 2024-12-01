@@ -40,10 +40,10 @@ Route::resource('customers', customerController::class);
 Route::resource('dashboards',dashboardController::class);
 Route::resource('orders', orderContoller::class);
 Route::resource('users', UserController::class);;
+Route::resource('routeOrder', routeOrderController::class);
 Route::resource('purchasings', purchasingController::class);
-Route::resource('saleses', salesController::class);
+Route::resource('sales', salesController::class);
 Route::resource('warehouses', warehouseController::class);
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
 

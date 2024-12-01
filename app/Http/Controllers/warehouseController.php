@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\warehouse;
 
 class warehouseController
 {
@@ -11,7 +12,8 @@ class warehouseController
      */
     public function index()
     {
-        //
+        $warehouses = Warehouse::all(); 
+        return view('warehouse.index', compact('warehouses'));
     }
 
     /**
@@ -19,7 +21,7 @@ class warehouseController
      */
     public function create()
     {
-        
+        return view('warehouse.create');
     }
 
     /**
@@ -27,7 +29,16 @@ class warehouseController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'materials' => 'required|string',
+            'assigned_name' => 'required|string|max:255',
+        ]);
+
+       
+        Warehouse::create($request->all());
+
+        return redirect()->route('warehouses.index')->with('success', 'Warehouse entry created successfully!');
+  
     }
 
     /**
@@ -35,7 +46,8 @@ class warehouseController
      */
     public function show(string $id)
     {
-        //
+        $warehouse = Warehouse::findOrFail($id);
+        return view('warehouse.show', compact('warehouse'));
     }
 
     /**
@@ -43,7 +55,8 @@ class warehouseController
      */
     public function edit(string $id)
     {
-        //
+        $warehouse = Warehouse::findOrFail($id); 
+        return view('warehouse.edit', compact('warehouse'));
     }
 
     /**
@@ -51,7 +64,17 @@ class warehouseController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'materials' => 'required|string',
+            'assigned_name' => 'required|string|max:255',
+        ]);
+
+        
+        $warehouse = Warehouse::findOrFail($id);
+        $warehouse->update($request->all());
+
+        return redirect()->route('warehouses.index')->with('success', 'Warehouse entry updated successfully!');
+
     }
 
     /**
@@ -59,6 +82,10 @@ class warehouseController
      */
     public function destroy(string $id)
     {
-        //
+        $warehouse = Warehouse::findOrFail($id);
+        $warehouse->delete();
+
+        return redirect()->route('warehouses.index')->with('success', 'Warehouse entry deleted successfully!');
+
     }
 }

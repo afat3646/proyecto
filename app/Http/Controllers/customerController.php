@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\customer;
 class customerController
 {
     /**
@@ -11,7 +11,8 @@ class customerController
      */
     public function index()
     {
-        //
+        $customers = customer::all();
+        return view('customer.index', compact('customers'));
     }
 
     /**
@@ -19,7 +20,7 @@ class customerController
      */
     public function create()
     {
-        
+        return view('customer.create');
     }
 
     /**
@@ -27,7 +28,15 @@ class customerController
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'customer_name' => 'required|string|max:255',
+            'fiscal_Data' => 'required|string|max:255',
+        ]);
+
+        Customer::create($validatedData);
+
+        return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
+
     }
 
     /**
@@ -35,7 +44,8 @@ class customerController
      */
     public function show(string $id)
     {
-        //
+        $customer = Customer::findOrFail($id); 
+        return view('customer.show', compact('customer'));
     }
 
     /**
@@ -43,7 +53,8 @@ class customerController
      */
     public function edit(string $id)
     {
-        //
+        $customer = customer::findOrFail($id);
+        return view('customer.edit', compact('customer'));
     }
 
     /**
@@ -51,7 +62,17 @@ class customerController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $customer = customer::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'customer_name' => 'required|string|max:255',
+            'fiscal_Data' => 'required|string|max:255'
+        ]);
+
+        $customer->update($validatedData);
+
+        return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
+
     }
 
     /**
@@ -59,6 +80,10 @@ class customerController
      */
     public function destroy(string $id)
     {
-        //
+        $customer = customer::findOrFail($id);
+        $customer->delete();
+
+        return redirect()->route('customers.index')->with('success', 'Customer deleted successfully.');
+
     }
 }

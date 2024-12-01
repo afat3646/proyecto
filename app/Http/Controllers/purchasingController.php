@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\purchasing;
+
 
 class purchasingController
 {
@@ -11,7 +13,8 @@ class purchasingController
      */
     public function index()
     {
-        //
+        $purchasings = purchasing::all();
+        return view('purchasing.index', compact('purchasings'));
     }
 
     /**
@@ -19,7 +22,7 @@ class purchasingController
      */
     public function create()
     {
-        
+        return view('purchasing.create');
     }
 
     /**
@@ -27,7 +30,16 @@ class purchasingController
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'purchase_order_number' => 'required|string|max:255',
+            'supplier_name' => 'required|string|max:255',
+            'purchase_details' => 'required|string',
+        ]);
+
+        Purchasing::create($validatedData);
+
+        return redirect()->route('purchasings.index')->with('success', 'Purchase record created successfully.');
+
     }
 
     /**
@@ -35,7 +47,8 @@ class purchasingController
      */
     public function show(string $id)
     {
-        //
+        $purchasing = purchasing::findOrFail($id);
+        return view('purchasing.show', compact('purchasing'));
     }
 
     /**
@@ -43,7 +56,8 @@ class purchasingController
      */
     public function edit(string $id)
     {
-        //
+        $purchasing = purchasing::findOrFail($id);
+        return view('purchasing.edit', compact('purchasing'));
     }
 
     /**
@@ -51,7 +65,17 @@ class purchasingController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'purchase_order_number' => 'required|string|max:255',
+            'supplier_name' => 'required|string|max:255',
+            'purchase_details' => 'required|string',
+        ]);
+
+        $purchasing = purchasing::findOrFail($id);
+        $purchasing->update($validatedData);
+
+        return redirect()->route('purchasings.index')->with('success', 'Purchase record updated successfully.');
+
     }
 
     /**
@@ -59,6 +83,10 @@ class purchasingController
      */
     public function destroy(string $id)
     {
-        //
+        $purchasing = purchasing::findOrFail($id);
+        $purchasing->delete();
+
+        return redirect()->route('purchasings.index')->with('success', 'Purchase record deleted successfully.');
+
     }
 }
