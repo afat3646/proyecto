@@ -50,8 +50,8 @@ class routeOrderController
      */
     public function show(string $id)
     {
-        $orders = order::all(); 
-        return view('routeorder.create', compact('orders')); 
+        $routeOrder = RouteOrder::findOrFail($id);
+        return view('routeOrder.show', compact('routeOrder'));
     
     }
 

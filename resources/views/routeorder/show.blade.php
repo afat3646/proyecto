@@ -6,11 +6,20 @@
     <title>Route Order Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="container mt-5">
+<body class="bg-dark text-white">
+
+    <header class="bg-gray-800 py-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="text-xl font-bold">Halcon System</h1>
+            <nav class="d-flex gap-3">
+        </div>
+    </header>
+
+
+    <main class="container mt-5">
         <h1 class="text-center mb-4">Route Order Details (ID: {{ $routeOrder->id }})</h1>
-        <div class="card">
-            <div class="card-header">
+        <div class="card bg-dark text-white border-light">
+            <div class="card-header bg-gray-800">
                 <h4>Order Information</h4>
             </div>
             <div class="card-body">
@@ -28,9 +37,9 @@
                 <p><strong>Updated At:</strong> {{ $routeOrder->updated_at->format('Y-m-d H:i:s') }}</p>
             </div>
         </div>
-        <div class="mt-3 d-flex justify-content-between">
+        <div class="mt-3 d-flex justify-content-end">
             <a href="{{ route('routeOrder.index') }}" class="btn btn-secondary">Back to List</a>
         </div>
-    </div>
+    </main>
 </body>
 </html>

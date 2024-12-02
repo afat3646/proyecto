@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\routeorder;
 use App\Models\order;
 class routeorder extends Model
 {
@@ -12,9 +11,10 @@ class routeorder extends Model
     protected $fillable=[
         'route_status',
         'route_name',
+        'order_id'
     ];
     
-    public function orders(){
+    public function order() {
         return $this->belongsTo(order::class, 'order_id');
     }
 }

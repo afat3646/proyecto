@@ -1,23 +1,19 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-//------------------------------------------------------------------------------------------------------------------------------------------
-
-                        //normal controllers
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderController; 
 use App\Http\Controllers\purchasingController;
 use App\Http\Controllers\routeOrderController;
 use App\Http\Controllers\salesController;
 use App\Http\Controllers\warehouseController;
 use App\Http\Controllers\customerController;
 
-//------------------------------------------------------------------------------------------------------------------------------------------
 
-                        //api controllers
+
 
 use App\Http\Controllers\customerApiController;
 use App\Http\Controllers\orderApiController;
@@ -26,51 +22,33 @@ use App\Http\Controllers\routeOrderApiController;
 use App\Http\Controllers\salesApiController;
 use App\Http\Controllers\warehouseApiController;
 
-//------------------------------------------------------------------------------------------------------------------------------------------
+Route::get('/', function () {
+    return view('welcome');
+});
 
-//------------------------------------------------------------Routes -----------------------------------------------------------------------
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', [PublicController::class, 'welcome']);
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 
-//------------------------------------------------------------------------------------------------------------------------------------------
+    
+});
 
-                        //routes ordinary                
+    Route::resource('customers', customerController::class);
+    Route::resource('dashboards',dashboardController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('purchasings', purchasingController::class);
+    Route::resource('sales', salesController::class);
+    Route::resource('warehouses', warehouseController::class);
+    Route::resource('routeOrder', routeOrderController::class);
 
-Route::resource('customers', customerController::class);
-Route::resource('dashboards',dashboardController::class);
-Route::resource('orders', OrderController::class);
-Route::resource('users', UserController::class);;
-Route::resource('routeOrder', routeOrderController::class);
-Route::resource('purchasings', purchasingController::class);
-Route::resource('sales', salesController::class);
-Route::resource('warehouses', warehouseController::class);
+    Route::get('/api/routeorders', [RouteOrderApiController::class, 'index']);
+    Route::get('/api/routeorders/{id}', [RouteOrderApiController::class, 'show']);
 
-//-----------------------------------------------------------------------------------------------------------------------------------------
-Route::get('/routeOrder/create', [routeOrderController::class, 'create'])->name('routeOrder.create');
-
-                        //routes api controllers 
-
-//customer -----------------------------------------------------------
-Route::get('/api/customers',[customerApiController::class, 'Index']);
-Route::get('/api/customer/{id}',[customerApiController::class, 'show']);
-
-//order --------------------------------------------------------------
-
-Route::get('/api/orders',[orderApiController::class, 'Index']);
-Route::get('/api/orders/{id}',[orderApiController::class, 'show']);
-
-//purchasing ----------------------------------------------------------
-
-Route::get('/api/purchasings',[purchasingApiController::class, 'Index']);
-Route::get('/api/purchasing/{id}',[purchasingApiController::class, 'show']);
-
-//route order ----------------------------------------------------------
-
-Route::get('/api/route',[routeOrderApiController::class, 'Index']);
-Route::get('/api/routes/{id}',[routeOrderApiController::class, 'show']);
-
-//warehouse -------------------------------------------------------------
-
-Route::get('/api/warehouses',[warehouseApiController::class, 'Index']);
-Route::get('/api/warehouse/{id}',[warehouseApiController::class, 'show']);
-
+require __DIR__.'/auth.php';

@@ -5,12 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Warehouse Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <div class="container mt-5">
+<body class="bg-dark text-white">
+
+    <header class="bg-gray-800 py-4">
+        <div class="container d-flex justify-content-between align-items-center">
+            <h1 class="text-xl font-bold">Halcon System</h1>
+            <nav class="d-flex gap-3">
+                <a href="{{ route('dashboard') }}" class="btn px-3 py-2 text-white">Dashboard</a>
+                <a href="{{ route('routeOrder.index') }}" class="btn  px-3 py-2 text-white">Route Orders</a>
+                <a href="{{ route('sales.index') }}" class="btn  px-3 py-2 text-white">Sales</a>
+                <a href="{{ route('warehouses.index') }}" class="btn px-3 py-2 text-white">Warehouse</a>
+                <a href="{{ route('customers.index') }}" class="btn  px-3 py-2 text-white">Customer</a>
+                <a href="{{ route('purchasings.index') }}" class="btn  px-3 py-2 text-white">Purchasing</a>
+                <a href="{{ route('orders.index') }}" class="btn px-3 py-2 text-white">Orders</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="container mt-5">
         <h1 class="text-center mb-4">Warehouse Management</h1>
-        <a href="{{ route('warehouses.create') }}" class="btn btn-primary mb-3">Add New Warehouse Entry</a>
+
 
         @if(session('success'))
             <div class="alert alert-success">
@@ -18,7 +34,12 @@
             </div>
         @endif
 
-        <table class="table table-striped">
+
+        <div class="mb-4 d-flex justify-content-end">
+            <a href="{{ route('warehouses.create') }}" class="btn btn-primary">Add New Warehouse Entry</a>
+        </div>
+
+        <table class="table table-dark table-striped table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -33,7 +54,7 @@
                         <td>{{ $warehouse->id }}</td>
                         <td>{{ $warehouse->materials }}</td>
                         <td>{{ $warehouse->assigned_name ?? 'N/A' }}</td>
-                        <td>
+                        <td class="d-flex gap-2">
                             <a href="{{ route('warehouses.show', $warehouse->id) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('warehouses.edit', $warehouse->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('warehouses.destroy', $warehouse->id) }}" method="POST" class="d-inline">
@@ -50,6 +71,6 @@
                 @endforelse
             </tbody>
         </table>
-    </div>
+    </main>
 </body>
 </html>

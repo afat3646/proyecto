@@ -27,7 +27,7 @@ class order extends Model
         return $this->belongsTo(Customer::class);
     }
     public function routeorder(){
-        return $this->hasOne(routeorder::class);
+        return $this->hasMany(routeorder::class, 'order_id');
     }
     public function warehouse(){
         return $this->belongsTo(warehouse::class);

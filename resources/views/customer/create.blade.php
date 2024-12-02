@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Customer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="bg-dark text-light">
     <div class="container mt-5">
         <h1 class="text-center mb-4">Create New Customer</h1>
-        <form action="{{ route('customers.store') }}" method="POST" class="p-3 border rounded">
+        <form action="{{ route('customers.store') }}" method="POST" class="p-4 border rounded shadow-sm bg-secondary">
             @csrf
             <div class="mb-3">
                 <label for="customer_name" class="form-label">Customer Name</label>
