@@ -35,10 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-
-    
-});
-
     Route::resource('customers', customerController::class);
     Route::resource('dashboards',dashboardController::class);
     Route::resource('orders', OrderController::class);
@@ -47,6 +43,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('sales', salesController::class);
     Route::resource('warehouses', warehouseController::class);
     Route::resource('routeOrder', routeOrderController::class);
+    
+});
+
+    
 
     Route::get('/api/routeorders', [RouteOrderApiController::class, 'index']);
     Route::get('/api/routeorders/{id}', [RouteOrderApiController::class, 'show']);
