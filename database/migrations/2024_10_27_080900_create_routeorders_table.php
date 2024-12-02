@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('routeorders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->foreignId('order_id')->nullable()->constrained('orders')->onDelete('cascade');
             $table->string('route_status');
             $table->string('route_name');
             $table->timestamps();
@@ -26,5 +26,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('routeorders');
+        Schema::table('routeorders', function (Blueprint $table) {
+            $table->foreignId('order_id')->nullable(false)->change();
+        });
     }
 };

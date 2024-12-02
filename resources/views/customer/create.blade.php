@@ -14,15 +14,11 @@
             @csrf
             <div class="mb-3">
                 <label for="customer_name" class="form-label">Customer Name</label>
-                <input type="text" name="customer_name" id="customer_name" class="form-control" required>
+                <input type="text" name="customer_name" id="customer_name" class="form-control" value="{{ old('customer_name') }}" required>
             </div>
             <div class="mb-3">
-                <label for="fiscal_data" class="form-label">Fiscal Data</label>
-                <input type="text" name="fiscal_data" id="fiscal_Data" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="customer_number" class="form-label">Customer Number</label>
-                <input type="text" name="customer_number" id="customer_number" class="form-control" required>
+                <label for="fiscal_Data" class="form-label">Fiscal Data</label>
+                <input type="text" name="fiscal_Data" id="fiscal_Data" class="form-control" value="{{ old('fiscal_Data') }}" required>
             </div>
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Create Customer</button>

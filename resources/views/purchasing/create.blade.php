@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Create New Purchase</h1>
-        <form action="{{ route('purchasing.store') }}" method="POST" class="p-3 border rounded">
+        <form action="{{ route('purchasings.store') }}" method="POST" class="p-3 border rounded">
             @csrf
             <div class="mb-3">
                 <label for="purchase_order_number" class="form-label">Purchase Order Number</label>

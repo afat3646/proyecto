@@ -6,7 +6,6 @@
     <title>Warehouse Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 <body>
     <div class="container mt-5">
@@ -33,7 +32,7 @@
                     <tr>
                         <td>{{ $warehouse->id }}</td>
                         <td>{{ $warehouse->materials }}</td>
-                        <td>{{ $warehouse->assigned_name }}</td>
+                        <td>{{ $warehouse->assigned_name ?? 'N/A' }}</td>
                         <td>
                             <a href="{{ route('warehouses.show', $warehouse->id) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('warehouses.edit', $warehouse->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -52,6 +51,5 @@
             </tbody>
         </table>
     </div>
-
-   </body>
+</body>
 </html>

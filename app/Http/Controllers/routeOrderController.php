@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\routeorder;
+use App\Models\order;
 
 class routeOrderController
 {
@@ -12,7 +13,7 @@ class routeOrderController
      */
     public function index()
     {
-        $routeOrders = routeOrder::all();
+        $routeOrders = routeOrder::with('order')->get(); 
         return view('routeOrder.index', compact('routeOrders'));
     }
 
@@ -21,7 +22,9 @@ class routeOrderController
      */
     public function create()
     {
-        return view('routeorder.create');
+        $orders = order::all();
+       
+        return view('routeorder.create', compact('orders'));
     }
 
     /**
@@ -30,14 +33,16 @@ class routeOrderController
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'order_number' => 'required|string|max:255',
-            'destination' => 'required|string|max:255',
-            'details' => 'required|string',
+            'order_id' => 'required|exists:orders,id',
+            'route_name' => 'required|string|max:255',
+            'route_status' => 'required|string|in:Delayed,In progress,Delivered',
         ]);
-
-        RouteOrder::create($validatedData);
-
+    
+        routeorder::create($validatedData);
+    
         return redirect()->route('routeOrder.index')->with('success', 'Route order created successfully.');
+    
+    
     }
 
     /**
@@ -45,8 +50,9 @@ class routeOrderController
      */
     public function show(string $id)
     {
-        $routeOrder = routeOrder::findOrFail($id);
-        return view('routeOrder.show', compact('routeOrder'));
+        $orders = order::all(); 
+        return view('routeorder.create', compact('orders')); 
+    
     }
 
     /**
@@ -64,15 +70,15 @@ class routeOrderController
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'order_number' => 'required|string|max:255',
-            'destination' => 'required|string|max:255',
-            'details' => 'required|string',
+            'route_name' => 'required|string|max:255',
+            'route_status' => 'required|string|in:Delayed,In progress,Delivered',
         ]);
-
-        $routeOrder = routeOrder::findOrFail($id);
+    
+        $routeOrder = routeorder::findOrFail($id);
         $routeOrder->update($validatedData);
-
+    
         return redirect()->route('routeOrder.index')->with('success', 'Route order updated successfully.');
+    
 
     }
 

@@ -11,11 +11,10 @@ class routeorder extends Model
     use HasFactory;
     protected $fillable=[
         'route_status',
-        'order_id',
         'route_name',
     ];
     
     public function orders(){
-        return $this->belongsTo(order::class);
+        return $this->belongsTo(order::class, 'order_id');
     }
 }

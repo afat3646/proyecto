@@ -16,7 +16,7 @@ class warehouseSeeder extends Seeder
     {
         warehouse::create([
             'materials'=> 'concrate, Gravel, Wood',
-            'assinged_name'=>'Alan',
+            'assigned_name'=>'Alan',
             
         ]);
         warehouse::factory(10)->create();

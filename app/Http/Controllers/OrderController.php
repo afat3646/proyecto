@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Order;
+use App\Models\order;
 
 
 class OrderController extends Controller
@@ -70,7 +70,7 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        $order = Order::findOrFail($id);
+        $order = order::findOrFail($id);
         return view('orders.edit', compact('order'));
     }
 
@@ -90,7 +90,7 @@ class OrderController extends Controller
             'photo_Delivered_Order' => 'nullable|string|max:255',
         ]);
 
-        $order = Order::findOrFail($id);
+        $order = order::findOrFail($id);
         $order->update($validatedData);
 
         return redirect()->route('orders.index')->with('success', 'Order updated successfully.');
@@ -105,7 +105,7 @@ class OrderController extends Controller
             'order_status' => 'required|string|in:ordered,in_process,in_route,delivered',
         ]);
 
-        $order = Order::findOrFail($id);
+        $order = order::findOrFail($id);
         $order->update(['order_status' => $validated['order_status']]);
 
         return redirect()->back()->with('success', 'Order status updated successfully.');
@@ -116,7 +116,7 @@ class OrderController extends Controller
      */
     public function uploadPhoto(Request $request, $id)
     {
-        $order = Order::findOrFail($id);
+        $order = order::findOrFail($id);
 
         if ($request->hasFile('photo')) {
             $path = $request->file('photo')->store('uploads', 'public');
@@ -136,7 +136,7 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        $order = Order::findOrFail($id);
+        $order = order::findOrFail($id);
         $order->update(['order_status' => 'archived']);
 
         return redirect()->route('orders.index')->with('success', 'Order archived successfully.');
@@ -147,7 +147,7 @@ class OrderController extends Controller
      */
     public function restore($id)
     {
-        $order = Order::where('id', $id)->where('order_status', 'archived')->firstOrFail();
+        $order = rder::where('id', $id)->where('order_status', 'archived')->firstOrFail();
         $order->update(['order_status' => 'ordered']);
 
         return redirect()->route('orders.index')->with('success', 'Order restored successfully.');

@@ -22,8 +22,8 @@
 
             <div class="mb-3">
                 <label for="assigned_name" class="form-label">Assigned Name</label>
-                <input type="text" name="assigned_name" id="assigned_name" class="form-control" 
-                       value="{{ old('assigned_name') }}" required>
+                <input type="text" name="assigned_name" id="assinged_name" class="form-control" 
+                       value="{{ old('assinged_name') }}" required>
             </div>
 
             <div class="d-flex justify-content-between">

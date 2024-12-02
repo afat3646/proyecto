@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\orderContoller; 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\purchasingController;
 use App\Http\Controllers\routeOrderController;
 use App\Http\Controllers\salesController;
@@ -38,7 +38,7 @@ Route::get('/', [PublicController::class, 'welcome']);
 
 Route::resource('customers', customerController::class);
 Route::resource('dashboards',dashboardController::class);
-Route::resource('orders', orderContoller::class);
+Route::resource('orders', OrderController::class);
 Route::resource('users', UserController::class);;
 Route::resource('routeOrder', routeOrderController::class);
 Route::resource('purchasings', purchasingController::class);
@@ -46,6 +46,7 @@ Route::resource('sales', salesController::class);
 Route::resource('warehouses', warehouseController::class);
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
+Route::get('/routeOrder/create', [routeOrderController::class, 'create'])->name('routeOrder.create');
 
                         //routes api controllers 
 

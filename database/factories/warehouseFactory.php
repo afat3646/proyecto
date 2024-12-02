@@ -18,7 +18,7 @@ class warehouseFactory extends Factory
     {
         return [
             'materials' => implode(', ', fake()->words(3)),
-            'assinged_name'=>fake()->name(),
+            'assigned_name'=>fake()->name(),
             
         ];
     }

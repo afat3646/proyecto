@@ -32,10 +32,11 @@ class customerController
             'customer_name' => 'required|string|max:255',
             'fiscal_Data' => 'required|string|max:255',
         ]);
-
+    
         Customer::create($validatedData);
-
+    
         return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
+    
 
     }
 
